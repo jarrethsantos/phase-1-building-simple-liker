@@ -2,10 +2,36 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+// Your JavaScript code goes here
 
+document.addEventListener('DOMContentLoaded', () => {
+  const errorModal = document.getElementById('modal');
+  const errorMessage = document.getElementById('modal-message');
+  const heart = document.querySelector('.like-glyph');
 
-
+  heart.addEventListener('click', () => {
+      mimicServerCall()
+          //.then
+          .then(() => {
+              if (heart.textContent === '♡') {
+                  heart.textContent = '♥';
+                  heart.classList.add('activated-heart');
+              } else {
+                  heart.textContent = '♡';
+                  heart.classList.remove('activated-heart');
+              }
+          })
+          //.catch
+          .catch((error) => {
+              errorMessage.textContent = error;
+              //.hidden
+              errorModal.classList.remove('hidden');
+              setTimeout(() => {
+                  errorModal.classList.add('hidden');
+              }, 3000);
+          });
+  });
+});
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
